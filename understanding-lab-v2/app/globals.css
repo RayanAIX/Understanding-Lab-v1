@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-newsreader: 'Newsreader', Georgia, serif;
+  --font-instrument: 'Instrument Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-instrument); background: #0C0C0E; color: #F0EFF8; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #0C0C0E; }
+::-webkit-scrollbar-thumb { background: rgba(147,130,255,0.5); border-radius: 2px; }
+::selection { background: rgba(147,130,255,0.25); color: #F0EFF8; }
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none; opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+.prose-serif { font-family: var(--font-newsreader); line-height: 1.85; color: #8B8A9A; }
+.prose-serif p + p { margin-top: 1em; }
+.font-serif { font-family: var(--font-newsreader); }
+.font-mono-custom { font-family: var(--font-mono); }
+
+.badge { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; white-space: nowrap; }
+.badge-working { background: rgba(45,212,191,0.1); color: #2DD4BF; border: 1px solid rgba(45,212,191,0.25); }
+.badge-working::before { content: '●'; font-size: 0.5rem; }
+.badge-planned { background: rgba(240,192,96,0.08); color: #F0C060; border: 1px solid rgba(240,192,96,0.2); }
+.badge-planned::before { content: '○'; font-size: 0.55rem; }
+.badge-preprint { background: rgba(147,130,255,0.1); color: #9382FF; border: 1px solid rgba(147,130,255,0.25); }
+.badge-preprint::before { content: '◆'; font-size: 0.5rem; }
+.badge-frozen { background: rgba(100,149,237,0.08); color: #89A8E8; border: 1px solid rgba(100,149,237,0.2); }
+
+.rule-glow { border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(147,130,255,0.3), transparent); }
+
+@keyframes orb1 {
+  0%,100% { transform: translate(0,0) scale(1); opacity:0.06; }
+  33% { transform: translate(80px,60px) scale(1.2); opacity:0.09; }
+  66% { transform: translate(-40px,100px) scale(0.9); opacity:0.05; }
+}
+@keyframes orb2 {
+  0%,100% { transform: translate(0,0) scale(1); opacity:0.05; }
+  33% { transform: translate(-100px,-60px) scale(1.15); opacity:0.08; }
+  66% { transform: translate(60px,-40px) scale(0.85); opacity:0.04; }
+}
+@keyframes orb3 {
+  0%,100% { transform: translate(0,0); opacity:0.04; }
+  50% { transform: translate(60px,-80px); opacity:0.07; }
+}
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes fadeUp { from { opacity:0; transform: translateY(28px); } to { opacity:1; transform: translateY(0); } }
+@keyframes drawLine { from { stroke-dashoffset: 800; } to { stroke-dashoffset: 0; } }
+@keyframes pulse-ring { 0%,100% { transform:scale(1); opacity:0.6; } 50% { transform:scale(1.08); opacity:1; } }
+@keyframes scanline { 0% { top:-4px; } 100% { top:100%; } }
+@keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+
+.animate-orb1 { animation: orb1 22s ease-in-out infinite; }
+.animate-orb2 { animation: orb2 28s ease-in-out infinite; }
+.animate-orb3 { animation: orb3 18s ease-in-out infinite; }
+.animate-float { animation: float 7s ease-in-out infinite; }
+.animate-fadeUp { animation: fadeUp 0.8s ease forwards; }
+.animate-pulse-ring { animation: pulse-ring 2.5s ease-in-out infinite; }
+
+.text-gradient-signal {
+  background: linear-gradient(135deg, #9382FF 0%, #C4B8FF 50%, #9382FF 100%);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s ease infinite;
+}
+.text-gradient-teal {
+  background: linear-gradient(135deg, #2DD4BF 0%, #67E8F9 50%, #2DD4BF 100%);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-hover { transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+.card-hover:hover { border-color: rgba(147,130,255,0.3) !important; box-shadow: 0 0 30px rgba(147,130,255,0.08); transform: translateY(-2px); }
+
+.btn-primary { background: #9382FF; color: #0C0C0E; font-family: var(--font-instrument); font-size: 0.85rem; font-weight: 600; padding: 11px 24px; border-radius: 5px; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; letter-spacing: 0.01em; }
+.btn-primary:hover { background: #a898ff; box-shadow: 0 0 24px rgba(147,130,255,0.4); transform: translateY(-1px); }
+.btn-secondary { background: transparent; color: #F0EFF8; font-family: var(--font-instrument); font-size: 0.85rem; font-weight: 500; padding: 10px 22px; border-radius: 5px; border: 1px solid rgba(147,130,255,0.25); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
+.btn-secondary:hover { border-color: rgba(147,130,255,0.6); background: rgba(147,130,255,0.06); }
+.btn-ghost { background: transparent; color: #9382FF; font-family: var(--font-instrument); font-size: 0.85rem; font-weight: 500; padding: 10px 22px; border-radius: 5px; border: 1px solid rgba(147,130,255,0.2); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
+.btn-ghost:hover { background: rgba(147,130,255,0.08); border-color: rgba(147,130,255,0.4); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
